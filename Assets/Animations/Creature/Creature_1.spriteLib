@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: creature-sheet (2)_0
+      m_Hash: 667834518
+      m_Sprite: {fileID: -739438597, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -42144938, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    - m_Name: creature-sheet (2)_2
+      m_Hash: 163592634
+      m_Sprite: {fileID: 1849117697, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -1061791222, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 2
+  - m_Name: Move
+    m_Hash: 252483654
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: creature-sheet (2)_0
+      m_Hash: 667834518
+      m_Sprite: {fileID: -739438597, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -42144938, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    - m_Name: creature-sheet (2)_1
+      m_Hash: 281634816
+      m_Sprite: {fileID: 1624352903, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -1762308871, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    - m_Name: creature-sheet (2)_2
+      m_Hash: 163592634
+      m_Sprite: {fileID: 1849117697, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -1061791222, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    - m_Name: creature-sheet (2)_3
+      m_Hash: 1053231404
+      m_Sprite: {fileID: 522910013, guid: 5f7ff4bb1c0a1497087f00a84d58119a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -1717187848, guid: 077ed2209271f42418f18d31710857ae, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: be3860949774ab24a9835b17d9d69a06
+  m_ModificationHash: 638598748340117028
+  m_Version: 1
