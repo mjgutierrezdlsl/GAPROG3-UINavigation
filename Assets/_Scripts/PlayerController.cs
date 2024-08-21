@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Interaction")]
+    [SerializeField] private SpriteRenderer _indicator;
+    public bool IsSelected { get; private set; }
+
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
@@ -46,8 +50,7 @@ public class PlayerController : MonoBehaviour
             // Prevents sprite from returning to default when movement key is released
             _spriteRenderer.flipX = _spriteRenderer.flipX;
         }
-
-        transform.Translate(_moveDirection * _movementSpeed * Time.deltaTime);
+        // transform.Translate(_moveDirection * _movementSpeed * Time.deltaTime);
     }
     private void LateUpdate()
     {
@@ -55,5 +58,18 @@ public class PlayerController : MonoBehaviour
         viewPosition.x = Mathf.Clamp(viewPosition.x, _screenBounds.x * -1 + _objectWidth, _screenBounds.x - _objectWidth);
         viewPosition.y = Mathf.Clamp(viewPosition.y, _screenBounds.y * -1 + _objectHeight, _screenBounds.y - _objectHeight);
         transform.position = viewPosition;
+    }
+
+    public void ShowSelectIndicator()
+    {
+        _indicator.gameObject.SetActive(true);
+    }
+    public void HideSelectIndicator()
+    {
+        _indicator.gameObject.SetActive(false);
+    }
+    public void GetSelected()
+    {
+        print($"{name} has been selected");
     }
 }
