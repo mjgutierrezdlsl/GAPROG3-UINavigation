@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class CreatureController : MonoBehaviour
 {
     [Header("Interaction")]
     [SerializeField] private SpriteRenderer _indicator;
@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveDirection;
     private Vector2 _screenBounds;
     private float _objectWidth, _objectHeight;
+
+    public Sprite Sprite => _spriteRenderer.sprite;
+
+    [field: SerializeField] public float MaxLikeness { get; private set; } = 100;
+    public float Likeness { get; private set; }
+
 
     private void Start()
     {
@@ -68,8 +74,11 @@ public class PlayerController : MonoBehaviour
     {
         _indicator.gameObject.SetActive(false);
     }
-    public void GetSelected()
+    public void GiveItemToPlayer()
     {
-        print($"{name} has been selected");
+        print($"{name} has been given the item");
+        Likeness += 10;
+        Likeness = Mathf.Clamp(Likeness, 0f, MaxLikeness);
+        print($"{Likeness}/100");
     }
 }
