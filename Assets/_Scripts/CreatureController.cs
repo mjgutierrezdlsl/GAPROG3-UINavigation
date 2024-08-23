@@ -66,6 +66,7 @@ public class CreatureController : MonoBehaviour
     }
     private void LateUpdate()
     {
+        // Prevents the player from moving the character off-camera
         var viewPosition = transform.position;
         viewPosition.x = Mathf.Clamp(viewPosition.x, _screenBounds.x * -1 + _objectWidth, _screenBounds.x - _objectWidth);
         viewPosition.y = Mathf.Clamp(viewPosition.y, _screenBounds.y * -1 + _objectHeight, _screenBounds.y - _objectHeight);
