@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class CreatureManager : MonoBehaviour
 {
+    [SerializeField] GameManager _gameManager;
+
     [Header("Spawning")]
     [SerializeField] private CreatureController[] _creaturePrefabs;
     [SerializeField] private float _spawnRange = 3;
@@ -47,20 +49,35 @@ public class CreatureManager : MonoBehaviour
     {
         foreach (var creature in _creatures)
         {
-            Destroy(creature);
+            Destroy(creature.gameObject);
         }
         _creatures.Clear();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _isSelecting = !_isSelecting;
 
-            // Only ran when selection is toggled off
-            if (!_isSelecting)
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
+                _isSelecting = false;
+                for (int i = 0; i < _creatures.Count; i++)
+                {
+                    var player = _creatures[i];
+                    player.HideSelectIndicator();
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                _isSelecting = !_isSelecting;
+
+                // Only ran when selection is toggled off
+                if (!_isSelecting)
+                {
                 for (int i = 0; i < _creatures.Count; i++)
                 {
                     var player = _creatures[i];
@@ -70,16 +87,7 @@ public class CreatureManager : MonoBehaviour
                         player.GiveItemToPlayer();
                     }
                 }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            _isSelecting = false;
-            for (int i = 0; i < _creatures.Count; i++)
-            {
-                var player = _creatures[i];
-                player.HideSelectIndicator();
+                }
             }
         }
 

@@ -4,48 +4,43 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent _onGameStart, _onGamePause, _onGameResume, _onGameEnd;
-    private bool isPaused;
-    public bool IsPaused
-    {
-        get => isPaused;
-        private set
-        {
-            isPaused = value;
-            if (isPaused)
-            {
-                Time.timeScale = 0f;
-                PauseGame();
-            }
-            else
-            {
-                Time.timeScale = 1f;
-                ResumeGame();
-            }
-
-        }
-    }
+    public bool IsGameRunning { get; private set; }
 
     public void StartGame()
     {
+        IsGameRunning = true;
+        Time.timeScale = 1f;
         _onGameStart?.Invoke();
     }
-    private void PauseGame()
+    public void PauseGame()
     {
+        Time.timeScale = 0f;
         _onGamePause?.Invoke();
     }
-    private void ResumeGame()
+    public void ResumeGame()
     {
+        Time.timeScale = 1f;
         _onGameResume?.Invoke();
     }
     public void EndGame()
     {
+        IsGameRunning = false;
+        Time.timeScale = 1f;
         _onGameEnd?.Invoke();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            IsPaused = !IsPaused;
+            IsGameRunning = !IsGameRunning;
+            if (IsGameRunning)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
     }
 }
