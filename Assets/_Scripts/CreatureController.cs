@@ -34,29 +34,35 @@ public class CreatureController : MonoBehaviour
 
     private void Update()
     {
+
+        // We only move if this is the creature selected
+        if (!IsSelected) { return; }
+
         // Gets the direction of the movement from the keyboard input
         _moveDirection = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         // Normalize the vector so we do not move faster when going diagonally
         _moveDirection.Normalize();
+        {
+            // Animate according to direction
+            _animator.SetBool(_isMovingParameter, _moveDirection != Vector2.zero);
 
-        // Animate according to direction
-        _animator.SetBool(_isMovingParameter, _moveDirection != Vector2.zero);
+            // Flip sprite according to direction
+            if (_moveDirection.x < 0)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else if (_moveDirection.x > 0)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else
+            {
+                // Prevents sprite from returning to default when movement key is released
+                _spriteRenderer.flipX = _spriteRenderer.flipX;
+            }
 
-        // Flip sprite according to direction
-        if (_moveDirection.x < 0)
-        {
-            _spriteRenderer.flipX = true;
+            transform.Translate(_moveDirection * _movementSpeed * Time.deltaTime);
         }
-        else if (_moveDirection.x > 0)
-        {
-            _spriteRenderer.flipX = false;
-        }
-        else
-        {
-            // Prevents sprite from returning to default when movement key is released
-            _spriteRenderer.flipX = _spriteRenderer.flipX;
-        }
-        // transform.Translate(_moveDirection * _movementSpeed * Time.deltaTime);
     }
     private void LateUpdate()
     {
@@ -74,11 +80,16 @@ public class CreatureController : MonoBehaviour
     {
         _indicator.gameObject.SetActive(false);
     }
-    public void GiveItemToPlayer()
+    public void SelectCreature()
     {
-        print($"{name} has been given the item");
+        print($"{name} has been selected");
+        IsSelected = true;
         Likeness += 10;
         Likeness = Mathf.Clamp(Likeness, 0f, MaxLikeness);
         print($"{Likeness}/100");
+    }
+    public void DeselectCreature()
+    {
+        IsSelected = false;
     }
 }

@@ -75,18 +75,25 @@ public class CreatureManager : MonoBehaviour
             {
                 _isSelecting = !_isSelecting;
 
-                // Only ran when selection is toggled off
-                if (!_isSelecting)
-                {
+                // Ensures that the previous creature has been deselected
                 for (int i = 0; i < _creatures.Count; i++)
                 {
                     var player = _creatures[i];
-                    player.HideSelectIndicator();
-                    if (i == SelectionIndex)
-                    {
-                        player.GiveItemToPlayer();
-                    }
+                    player.DeselectCreature();
                 }
+
+                // Only ran when selection is toggled off
+                if (!_isSelecting)
+                {
+                    for (int i = 0; i < _creatures.Count; i++)
+                    {
+                        var player = _creatures[i];
+                        player.HideSelectIndicator();
+                        if (i == SelectionIndex)
+                        {
+                            player.SelectCreature();
+                        }
+                    }
                 }
             }
         }
