@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AIGAME
@@ -7,7 +5,11 @@ namespace AIGAME
     public abstract class Character : MonoBehaviour
     {
 
-        public Health Health { get; private set; }
+        [field: SerializeField] public Health Health { get; private set; }
+        public virtual void Initialize(float maxHealth = 100f)
+        {
+            Health = new(maxHealth);
+        }
         public virtual void TakeDamage(float damageAmount)
         {
             Health.ReduceHealth(damageAmount);
@@ -16,6 +18,8 @@ namespace AIGAME
             {
                 Destroy(gameObject);
             }
+
+            print($"{name} Health: {Health.CurrentHealth}/{Health.MaxHealth}");
         }
 
         [Header("Animation")]
@@ -60,5 +64,18 @@ namespace AIGAME
             AnimateMovement(GetMovementDirection());
         }
 
+        [Header("Selection")]
+        [SerializeField] protected SpriteRenderer _selectionIndicator;
+        public void ShowIndicator()
+        {
+            _selectionIndicator.gameObject.SetActive(true);
+        }
+
+        public void HideIndicator()
+        {
+            _selectionIndicator.gameObject.SetActive(false);
+        }
+
+        public abstract void Select();
     }
 }

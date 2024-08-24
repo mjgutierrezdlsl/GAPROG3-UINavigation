@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using UnityEngine;
 
 namespace AIGAME
@@ -9,6 +9,16 @@ namespace AIGAME
         [SerializeField] Transform[] waypoints;
         private int _wayPointIndex;
         private Vector3 _currentWaypoint;
+        public void Initialize(Transform[] waypoints, float maxHealth = 100)
+        {
+            base.Initialize(maxHealth);
+            this.waypoints = waypoints;
+        }
+        public override void Select()
+        {
+            _wayPointIndex = Random.Range(0, waypoints.Length);
+            print("Randomizing waypoints");
+        }
 
         protected override Vector2 GetMovementDirection()
         {
