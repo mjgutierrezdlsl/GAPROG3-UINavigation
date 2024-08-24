@@ -37,5 +37,11 @@ namespace AIGAME
             MaxHealth = maxAmount;
             CurrentHealth = MaxHealth;
         }
+
+        public Health(float currentHealth, float maxHealth)
+        {
+            MaxHealth = maxHealth;
+            CurrentHealth = currentHealth;
+        }
     }
 }

@@ -241,7 +241,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5800482535705827828}
   _animator: {fileID: 6698438738416998168}
   _movementSpeed: 1
-  _selectionIndicator: {fileID: 0}
+  _selectionIndicator: {fileID: 1423792062956804501}
   waypointThreshold: 1
   waypoints:
   - {fileID: 0}

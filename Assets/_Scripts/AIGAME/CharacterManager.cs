@@ -7,6 +7,24 @@ namespace AIGAME
         [SerializeField] Character[] _characterPrefabs;
         [SerializeField] Transform[] _wayPoints;
         private List<Character> _characters = new();
+        private bool _isSelecting;
+        private int _selectionIndex;
+        private int SelectionIndex
+        {
+            get => _selectionIndex;
+            set
+            {
+                _selectionIndex = value;
+                if (_selectionIndex < 0)
+                {
+                    _selectionIndex = _characters.Count - 1;
+                }
+                else if (_selectionIndex >= _characters.Count)
+                {
+                    _selectionIndex = 0;
+                }
+            }
+        }
         private void Start()
         {
             for (int i = 0; i < _characterPrefabs.Length; i++)
@@ -26,19 +44,77 @@ namespace AIGAME
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                for (int i = _characters.Count - 1; i >= 0; i--)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    var character = _characters[i];
-                    if (character == null)
+                    _isSelecting = false;
+                    for (int i = 0; i < _characters.Count; i++)
                     {
-                        _characters.Remove(character);
+                        var player = _characters[i];
+                        player.HideSelectIndicator();
                     }
-                    else
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    _isSelecting = !_isSelecting;
+
+                    // Ensures that the previous creature has been deselected
+                    for (int i = 0; i < _characters.Count; i++)
                     {
-                        character.Select();
+                        var player = _characters[i];
+                        // player.DeselectCreature();
                     }
+
+                    // Only ran when selection is toggled off
+                    if (!_isSelecting)
+                    {
+                        for (int i = 0; i < _characters.Count; i++)
+                        {
+                            var player = _characters[i];
+                            player.HideSelectIndicator();
+                            if (i == SelectionIndex)
+                            {
+                                player.Select();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (_isSelecting)
+            {
+                SelectPlayer(SelectionIndex);
+                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D))
+                {
+                    SelectionIndex++;
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
+                {
+                    SelectionIndex--;
+                }
+            }
+        }
+
+        private void SelectPlayer(int index)
+        {
+            for (int i = _characters.Count - 1; i >= 0; i--)
+            {
+                var character = _characters[i];
+                if (character == null)
+                {
+                    _characters.Remove(character);
+                }
+                if (i != index)
+                {
+                    character.HideSelectIndicator();
+                }
+                else
+                {
+                    character.ShowSelectIndicator();
                 }
             }
         }

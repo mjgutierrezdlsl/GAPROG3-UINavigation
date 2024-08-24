@@ -241,4 +241,4 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 3061480614793822311}
   _animator: {fileID: 3480684018628233304}
   _movementSpeed: 2
-  _selectionIndicator: {fileID: 0}
+  _selectionIndicator: {fileID: 303859511877266678}

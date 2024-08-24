@@ -4,8 +4,7 @@ namespace AIGAME
 {
     public abstract class Character : MonoBehaviour
     {
-
-        [field: SerializeField] public Health Health { get; private set; }
+        [field: SerializeField] public Health Health { get; protected set; }
         public virtual void Initialize(float maxHealth = 100f)
         {
             Health = new(maxHealth);
@@ -66,12 +65,12 @@ namespace AIGAME
 
         [Header("Selection")]
         [SerializeField] protected SpriteRenderer _selectionIndicator;
-        public void ShowIndicator()
+        public void ShowSelectIndicator()
         {
             _selectionIndicator.gameObject.SetActive(true);
         }
 
-        public void HideIndicator()
+        public void HideSelectIndicator()
         {
             _selectionIndicator.gameObject.SetActive(false);
         }

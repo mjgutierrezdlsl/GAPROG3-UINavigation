@@ -5,6 +5,11 @@ namespace AIGAME
 {
     public class PlayerCharacter : Character
     {
+        public override void Initialize(float maxHealth = 100)
+        {
+            Health = new Health(maxHealth / 2, maxHealth);
+        }
+
         public override void Select()
         {
             TakeDamage(10);

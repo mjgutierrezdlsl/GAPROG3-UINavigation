@@ -23,10 +23,11 @@ namespace AIGAME
         protected override Vector2 GetMovementDirection()
         {
             _currentWaypoint = waypoints[_wayPointIndex].position;
-            Vector2 moveDirection = _currentWaypoint - transform.position;
+            var moveDirection = _currentWaypoint - transform.position;
             return moveDirection.normalized;
         }
-        protected override void Move(Vector2 direction)
+
+        protected override void Move(Vector2 _)
         {
             transform.position = Vector2.MoveTowards(transform.position, _currentWaypoint, _movementSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, _currentWaypoint) < waypointThreshold)
