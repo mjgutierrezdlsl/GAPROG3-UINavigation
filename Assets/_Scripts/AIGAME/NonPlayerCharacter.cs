@@ -30,7 +30,10 @@ namespace AIGAME
         protected override void Move(Vector2 _)
         {
             transform.position = Vector2.MoveTowards(transform.position, _currentWaypoint, _movementSpeed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, _currentWaypoint) < waypointThreshold)
+
+            var direction = _currentWaypoint - transform.position;
+
+            if (direction.magnitude < waypointThreshold)
             {
                 _wayPointIndex++;
 
@@ -40,6 +43,11 @@ namespace AIGAME
                     _wayPointIndex = 0;
                 }
             }
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(transform.position, _currentWaypoint);
         }
     }
 }
